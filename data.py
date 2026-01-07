@@ -68,3 +68,22 @@ def encode(text, code, max_length=512):
 def decode(input_ids):
     tokenizer = AutoTokenizer.from_pretrained("./saved_tokenizer")
     return tokenizer.decode(input_ids)
+
+from torch.utils.data import DataLoader
+def create_data_loaders():
+    processed_dataset = load_from_disk("./data/mbpp_processed")
+    processed_dataset.set_format(type='torch', columns=['input_ids', 'attention_mask', 'labels'])
+
+    train_dataloader = DataLoader(
+        processed_dataset['train'],
+        batch_size=8,  # adjust based on GPU memory
+        shuffle=True
+    )
+
+    val_dataloader = DataLoader(
+        processed_dataset['validation'],
+        batch_size=8,
+        shuffle=False
+    )
+
+    return train_dataloader, val_dataloader
