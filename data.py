@@ -52,9 +52,17 @@ def encode(text, code, max_length=512):
     # attention_mask
     pad_mask = [1 if token_id != tokenizer.pad_token_id else 0 for token_id in input_ids]
 
+    # labels: shifted ids
+    labels = input_ids[1:] + [pad_id]
+    sep_index = labels.index(tokenizer.sep_token_id)
+    for i in range(len(labels)):
+        if i <= sep_index or labels[i] == tokenizer.pad_token_id:
+            labels[i] = -100  # ignore index for loss calculation
+
     return {
         'input_ids': input_ids,
-        'pad_mask': pad_mask
+        'attention_mask': pad_mask,
+        'labels': labels
     }
 
 def decode(input_ids):
