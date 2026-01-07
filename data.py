@@ -41,8 +41,8 @@ def encode(text, code, max_length=512):
         
         # Rebuild sequence
         input_ids = ([tokenizer.bos_token_id] +
-            prompt_tokens + [tokenizer.sep_id] + code_tokens +
-            [tokenizer.eos_id])
+            prompt_tokens + [tokenizer.sep_token_id] + code_tokens +
+            [tokenizer.eos_token_id])
         
     # pad
     pad_id = tokenizer.convert_tokens_to_ids('<PAD>')
