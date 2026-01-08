@@ -5,3 +5,5 @@ truncate code at end?
 list vs tensors
     creating pad mask, is it slow?
     labels: generate separately, or generate off ids?
+
+when to test?
