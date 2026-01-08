@@ -1,10 +1,10 @@
 from torch.optim import AdamW
 from tqdm import tqdm
 
-def train(train_dataloader, model, device, num_epochs=3,):
+def train(train_dataloader, model, device, num_epochs=3, lr=1e-4):
     print("Starting training on ", device)
 
-    optimizer = AdamW(model.parameters(), lr=1e-5)
+    optimizer = AdamW(model.parameters(), lr=lr)
     model.train()
 
     for epoch in range(num_epochs):
