@@ -61,3 +61,12 @@ def train(train_dataloader, val_dataloader, model, device, num_epochs=3, lr=1e-4
                 progress_bar.set_postfix({'val_loss': loss.item()})
         avg_loss = total_loss / len(val_dataloader)
         print(f"Epoch {epoch+1}/{num_epochs}, Val Loss: {avg_loss:.4f}")
+
+if __name__ == "__main__":
+    from model import load_model
+    from train import train
+    from data import create_data_loaders
+
+    train_loader, val_loader = create_data_loaders()
+    model, device = load_model()
+    train(train_dataloader=train_loader, val_dataloader=val_loader, model=model, device=device, num_epochs=1)
