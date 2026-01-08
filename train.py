@@ -62,6 +62,10 @@ def train(train_dataloader, val_dataloader, model, device, num_epochs=3, lr=1e-4
         avg_loss = total_loss / len(val_dataloader)
         print(f"Epoch {epoch+1}/{num_epochs}, Val Loss: {avg_loss:.4f}")
 
+    # save model
+    model.save_pretrained("./finetuned_model")
+
+
 if __name__ == "__main__":
     from model import load_model
     from train import train
